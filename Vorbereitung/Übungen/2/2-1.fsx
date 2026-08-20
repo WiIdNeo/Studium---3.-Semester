@@ -1,5 +1,6 @@
 let a: int = int (System.Console.ReadLine())
 
+// Bedingung
 if a % 2 = 0 then 
     printfn "Gerade"
 else
