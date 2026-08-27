@@ -47,10 +47,7 @@ Man fügt **weitere** Maschinen/Server hinzu und verteilt die Last auf mehrere K
 - ❌ Komplexer umzusetzen: Lastverteilung (Load Balancing) und Synchronisation zwischen den Servern nötig
 - ❌ Nicht jede Software lässt sich gut parallelisieren
 
-**Eselsbrücke:** Vertikal = "ein Rechner wird stärker" (nach oben wachsen), Horizontal = "es kommen mehr Rechner dazu" (in die Breite wachsen).
-
-> - [Horizontale Skalierung und vertikale Skalierung – einfach & schnell erklärt](https://www.youtube.com/watch?v=3Xk26PS4em0)
-> - [Vertikales vs. Horizontales Skalieren – Was ist der Unterschied?](https://www.youtube.com/shorts/GjbvOtczADs) (kurzes Short, gut zum schnellen Auffrischen)
+**Eselsbrücke:** Vertikal = "ein Rechner wird stärker" (nach oben wachsen), Horizontal = "es kommen mehr Rechner dazu" (in die Breite wachsen).S
 
 ---
 
