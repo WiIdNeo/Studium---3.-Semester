@@ -1,0 +1,7 @@
+- Error Detection and Correction
+  - Paritätsprüfung
+    - Bit
+    - Schema
+  - Prüfsummen
+    - Cyclic Redundancy Check (Aufgabe: Script zum Erstellen der Prüfsumme und Empfangen und überprüfen)
+  - CRC
