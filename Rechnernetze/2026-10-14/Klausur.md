@@ -1,0 +1,44 @@
+- IP-Fragmentierung
+- Router
+- OSI-Layer 1 - 4, 5 -7 als nebensächliche Anwendungsschicht
+- IPv4-Adressen
+  - Aufbau
+- Adressen und Subnetze
+- Subnetzmasken
+- CIDR-Notation
+  - Netz- und Hostanteil
+- Private IPv4-Adressbereiche: Seite 177
+- Subnetting
+  - Wie teilt man Netze auf?
+  - Höchste Subnetzmaske in der KLausur: 20
+  - Warum geht 10.0.2.0/22 als Netz nicht, aber 10.0.4.0/22 und 10.0.0.0/22 schon?
+- Supernetting (wenig relevanz)
+
+
+- ICMP
+  - Destination Unreachable
+  - Time Exceeded
+  - Echo Request / Echo Reply
+  - Redirect
+  - Parameter Problem
+- ARP
+- IGMP
+
+- Router
+  - Datenweiterleitung
+  - Routing-Entscheidung
+  - Netzwerksegmentierung
+  - NAT
+  - Firewall
+  - Gateway
+  - Zusätzlich
+    - VPN-Unterstützung
+    - Load-Balancing
+  - Funktionsweise
+    - Routing-Einträge
+      - Directly Connected
+      - Statisches Routing
+      - Dynamisches Routing
+
+- Layer-3-Kommunikation
+  - 
