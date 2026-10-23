@@ -1,0 +1,4 @@
+- mutex
+- speicherseite vs speicherrahmen
+- Auslagern der Speicherseiten: Optimum Name = Belady
+- 
