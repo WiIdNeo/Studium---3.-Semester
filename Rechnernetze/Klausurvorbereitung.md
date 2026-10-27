@@ -76,9 +76,17 @@ Alle Systeme sind RIngförmig miteinander verbunden. Sie können das Signal alle
 
 #### Bus
 
-Alle Systeme werden über einen zentralen Bus verbunden. Wenn dieser kaputgeht, bricht die 
+Alle Systeme werden über einen zentralen Bus verbunden. Wenn dieser kaputgeht, bricht die Verbrindung ab. Dafür einfache Verkabelung.
 
-### Technologie
+#### Baum
+
+hirachische Weiterwntwicklung des Sterns, einfache Erweiterbarkeit und übersichtliches Routing. Nur Hirachisch geringere Knoten und verbindungen sind nur von Ausfällen eines Knoten betroffen.
+-
+#### (Voll-)Vermascht
+
+Jedes Gerät ist mit mehreren anderen Verbunden. So haben Ausfälle kaum auswirkungen, dafür ist es schwierig zu warten und kostet viel Kabel.
+
+### Technologien
 
 Eingesetzte Medien oder Protokolle
 
@@ -87,4 +95,174 @@ Eingesetzte Medien oder Protokolle
 - Zentrale Verantwortung
 - Verteilte Verwaltung
 
+### Architekturen
+
+#### Monolithische Anwendungssysteme
+
+- Zentraler Großrechner, an den mehrere Terminals angesschlossen sind
+- schlechte erweiterbarkeit und einbindung
+
+#### Cloud-Computing
+
+- Verteilt Anwendung und Ressourcen
+- Servicemodelle
+  - SaaS: Fertige Softwarelösung
+  - IaaS: RAM/VRAM 
+  - PaaS: Entwicklungsplattformen für eigene Anwendungen
+  - Public Cloud
+  - Private Cloud
+  - Hybrid Cloud
+
+
+# Herausforderungen
+
+## Verzögerung
+
+### Verarbeitungsverzögerung
+
+- Zeit, die ein Router benötigt, um zu empfangen, zu analysieren und weiterzuleiten
+- Eintreffrate: $\alpha$ (Pakete pro Sekunde)
+- Übertragungsgeschwindigkeit des Mediums $R$
+- Bits pro Paket: $L$ und mittlere Bitmenge pro Paket $L_\alpha$
+
+|$L / R$ (Verkehrswert)|Verzögerung|
+|-|-|
+|>1|gering|
+|>1 && ~1|stark|
+|<1|endlos|
+
+![alt text](Verkehrswert.png)
+
+### Warteschlangenverzögerung
+
+- wenn mehrere Pakete zeitgleich beim Router ankommen und in eine Warteschlange gestellt werden müssen.
+- ein Router kann nur sequenziell weiterleiten
+
+### Übertragungsverzögerung
+
+- Zeit, die benötigt wird, ein Paket vollständig auf das Medium übertragen (Also das reine Senden?)
+- $\text{Ausbreitungsgeschwindigkeit} = \frac{\text{Paketgröße}}{\text{Datenrate}}$
+
+### Ausbreitungsverzögerung
+
+- Die Zeit, die ein Signal vom Sender zu Empfänger braucht
+- $\text{Ausbreitungsgeschwindigkeit} = \frac{Strecke}{Ausbreitungsgeschwindigkeit}$
+
+## Durchsatz
+
+- momentan: Geschwindigkeit, mit der der Host empfängt
+- durchschnittlich: $R = \frac{\text{Datenmenge F}}{t}$
+- maximale Durchsatzrate: $R = \min(\text{R_S Geschwindigkeit der Datenübertragung des Servers}, \text{R_C Geschwindigkeit der Datenübertragung des Clients})$
+  - Wenn $R_S > R_C$, entstehen Engpässe
+
+## Skalierbarkeit
+
+Skalierbarkeit beschreibt die Fähigkeit selbst bei zunehmender Größe stabil und leistungsfähig zu bleiben.
+
+### Horizontale Skalierung
+
+- Erweiterung um physische Komponenten
+- Erhöhung der Fehlertoleranz
+- Ermöglichen von Rolling Updates
+
+### vertikale Skalierung
+
+- Bestehende Komponenten leistungsfähiger machen
+- stößt schneller an physikalische oder wirtschaftliche Komponenten
+
+## Verfügbarkeit
+
+Beschreibt die Betriebsbereitschaft eines Netzwerks. 
+
+### Redundanz
+
+- multible Verkabelung
+
+### Failover-Mechanismen
+
+- Automatisches Umschalten auf Ersatzsysteme
+
+### Fehlertolerante Protokolle
+
+### Monitoring und Frühwarnsysteme
+
+- Bestimmte Protokolle und Tests wie Pings sind oft Frühwarnungen
+
+## Sicherheit und Datenschutz (CIA)
+
+### Vertraulichkeit (Confidential)
+
+Nur berechtigte Personen dürfen auf Informationen zugreifen.
+
+### Integrität (Integrity)
+
+Daten dürfen nicht unbemerkt manipuliert/beschädigt werden.
+
+### Verfügbarkeit (Availability)
+
+Systeme und Daten müssen zuverlässig nutzbar sein
+
+### Wege dorthin
+
+- Zugriffs- und Rechteverwaltung: Rollenbasierte Zugriffskonzepte
+- Verschlüsselung der Daten: Technologien wie HTTPS oder TLS
+- Firewall-, Intrusion Detection/Prevention Systeme (IDS/IPS): Kontrollieren des Datenverkehrs und erkennen von verdächtigen Mustern
+- Physische Sicherheit der Netzwerk-Komponten.
+
+# ISO/OSI-Modell
+
+![alt text](ISOOSI.png)
+
+![alt text](PDU.png)
+
+## Ein- und Entkapselung
+
+Jede Schicht fügt einen Header mit für die Schicht relevanten Metadaten hinzu. Bei der Entkapselung werden die Header von ihren Schichten wieder entfernt.
+
+![alt text](Kapselung.png)
+
+## Bitübertragungsschicht
+
+- Physikalische Übertragung der Bitfolgen
+- Wandelt die Bits basieren auf den Anforderungen der Übertragungsinfrastruktur um
+  - Kupfer: Elektrisches Signal
+  - Glasfaser: optisches Signal
+  - drahtlos: Funk- oder Lichtwellen
+- definiert Bitlaufzeiten und Aufbau, Erhalt und Rücksetzbarkeit der physikalischen Verbindung
+- keine Fehlerprüfung, lediglich Übertragung
+
+## Sicherungsschicht
+
+- sorgt für die fehlerfreie Datenübertragung innerhalb von lokalen Netzwerken. 
+- physikalische (MAC-)Adressen für die Identifikation
+  
+### Media Access Control (MAC)
+
+Steuert den Zugriff auf das Übertragungsmedium und regelt, welches Gerät wann senden darf.
+
+### Logical Link Control (LLC)
+
+- Erkennt und behebt Übertragungsdehler
+- verwaltet logische Verbindungen und Gruppiert Bits in Frames
+
+## Vermittlungsschicht
+
+- logische Addressierung und Routing zwischen Netzwerken
+- IP-Adressen
+
+### Routing
+
+- **Statisches Routing**: Vordefinierte Routen, unabhängig der aktuellen Netzwerksituation
+- **Dynamisches Routing**: Routen werden für jede Übertragung neu bestimmt - je anch Auslastung, Verzögerung und Verbindungsstatus
+
+### MTU (Maximum Transmission Unit)
+
+- Maximale Größe von IP-Paketen
+- Wenn Überschritten, dann Fragmentiert
+
+### Übertragung über Router
+
+![alt text](Layer3Uebertragung.png)
+
+## Transportschicht
 
