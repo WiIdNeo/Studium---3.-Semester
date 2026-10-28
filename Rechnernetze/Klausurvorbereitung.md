@@ -41,7 +41,7 @@ Die Bestandteile eines Rechnernetzes lassen sich in drei grundlegende Kategorien
 
 |Layer|Name|Protokolle|Geräte|
 |-|-|-|-|
-|1|Bitübertragungsschicht|USB, DSL, ISDN|Kabel, Hubs|
+|1|Bitübertragungsschicht|USB, DSL, ISDN|Kabel, Hubs, Transciever|
 |2||ARP, Ethernet, LLDP|Switches, Access Point, Modem|
 |3||IP, RIP, OSPF, ICMP|Router
 |4||TCP, UDP, TFTP|Gateway, Firewalls
@@ -367,3 +367,185 @@ Steuert den Zugriff auf das Übertragungsmedium und regelt, welches Gerät wann 
 - Eine 1 durch den Wechsel von Low to High
 
 ![alt text](ManchesterLeitungscode.png)
+
+# Modulation
+
+- Anpassen der Frequenz der Nutzdaten in den Durchlassbereich der Übertragung
+
+## Analoge verfahren
+
+- Amplituden-Modulation (AM)
+- Frequenz-Modulation (FM)
+- Phasen-Modulation (PM)
+
+![alt text](AnalogeModulation.png)
+
+## Digitale Modulation
+
+- Amplitude Shift Keying (ASK): Unterschiedliche Amplituden codieren Bitwerte
+- Frequency Shift Keying (FSK): Unterschiedliche Frequenzen codieren Bitwerte
+- Phase Shift Keying (PSK): Die Phase eines Trägersignals springt zwischen festen Werten
+  - 0° und 180°: BPSK
+  - 0°, 90°, 180°, 270°: QPSK
+- Quadrature Amplitude Modulation (QAM): Kombination aus AM und PM, kann mehrere Bits pro Symbole Übertragen
+
+![alt text](DigitaleModulation.png)
+
+## Mehrträgermodulation
+
+- Signal wird auf viele benachbarte Frequenzen verteilt, um die Daten paralell zu übertragen
+
+![alt text](Mehrträgermodulation.png)
+
+# Konstallationsdiagramme (I/Q-Diagramme)
+
+![IQDiagramm](IQDiagramm.png)
+
+Eine höhere Informationsdichte macht die Übertragung Anfälliger gegenüber Rauschen
+
+## Gray-Code
+
+Repositionierung der Symbole, so dass benachbarte Symbole sich nur in einem Bit unterscheiden, was Mehrbitfehler unwahrscheinlicher macht
+
+![alt text](GrayCode.png)
+
+# Multiplexing
+
+Mehr Daten durch eine Datenleitung senden.
+
+## Trennung
+
+### Frequency Division Multiplexing (FDM)
+
+- Aufteilen der Bandbreite in unterkanäle: Paralelle Übertragung.
+- Schutzfrequenzen gegen Überlappung
+- OFDM: Keine Überlappung aufgrund Orthogonaler Auteilung nötig.
+
+### Time Division Multiplexing (TDM)
+
+- Jeder Teilnehmer erhält feste Zeitschlitze zum Übertragen
+- Synchrones TDM: fest auch wenn ungenutzt
+- Asynchrones/statistisches TDM: Zeitschlitze werden bei Bedarf vergeben.
+
+### Code Division Multiplexing (CDM)
+
+- orthogolane Chip-Codes, die orthogonal sind
+- Jeder Teilnehmer multipliziert seine Daten mit dem Chip-Code
+- Alle senden gleichzeitig. Der Empfänger multipliziert das Signal mit der Chipfolge und summiert die Chips auf
+  - -N, eine Null übertragen
+  - N, eine Eins übertragen
+  - 0, nichts übertragen
+  
+![alt text](Multiplexing.png)
+
+
+# Kabelgebundene Übertragung
+
+## Thin-Wire (Koaxial-Kabel)
+
+- Bus-Topologie
+- Geringe Übertragungsrate
+
+![alt text](Koaxialkabel.png)
+
+## Twisted Pair
+
+- verdrillte Adernpaare
+
+![alt text](AufbauTwistedPair.png)
+
+![alt text](SchirmungTwistedPair.png)
+
+## Glasfaserkabel
+
+- Totalreflexion von Licht
+
+### Multimode
+
+- vielfache reflexion
+
+### Single-Mode
+
+- besonders dünner kern, wodurch es ein Wellenleiter wird
+- ohne reflexion geleitet
+
+
+![alt text](AufbauGlasfaser.png)
+
+### Fasertypen
+
+![alt text](FasertypenGlasfaser.png)
+
+# Strukturierte Verkabelung
+
+## Verkabelungsebenen
+
+### Primär (Geländeverkabelung)
+
+- Hauptanbindung eines Gebäudes an ein Rechenzentrum oder an den Gebäudeverteiler
+- Hohe Reichweite nötig
+
+### Sekundär
+
+- Gebäudeverteiler an Etagenverteiler
+
+### Tertiär (Etagenverkabelung)
+
+- Etagenverteiler zu den Endgeräten
+
+### Vorteile
+
+- Hirachische Struktur
+  - einfaches Eingrenzen auf Etage/Gebäude/Gesamtnetz
+- Skalierbarkeit
+- Kosten- und Leistungseffizienz
+
+## Netzwerkdesign
+
+### Collapsed Backbone
+
+- Verzichted auf sekundäre Verkabelung
+- Weniger Platz und Verwaltungsaufwand
+- Sigle Point of Failure
+
+### Distributed Backbone
+
+- Weitere Aufteilung
+
+# Kabellose Übertragung
+
+![alt text](Frequenzbereiche.png)
+
+## Spreizspektrumverfahren
+
+### Frequency Hopping Spread Spectrum (FHSS)
+
+- Einteiled der Bandbreite in kleinere Kanäle
+- per Pseudozufallsverfahren wird zwischen verschiedenen Kanälen gesprungen
+- erschwerte Abhörung und bessere Ausfallsicherheit
+
+### Direct Sequence Spread Spectrum (DSSS)
+
+- multiplizieren mit einer Schnellen Chipfolge
+- erhöhte ABhörsicherheit und Störunanfällig
+
+### Ultra-WideBand (UWB)
+
+- min 500mHz Banbreite
+- sehr geringe Leistung nötig, dadurch sehr hohe Datenrate möglich
+
+# Hubs 
+
+- keine Kollisionsvermeidung
+- einfaches ungefiltertes weiterleiten
+
+# Sicherungsschicht
+
+## Aufbau und Aufgaben
+
+- Fehlerfreie Übertragung Datenübertragung zwischen direkt verbundenen Netzwerkknoten
+- Fehlererkennung und -korrektur
+  - Prüfsummen
+  - zyklische Redundanzprüfung (CRC)
+- 
+
