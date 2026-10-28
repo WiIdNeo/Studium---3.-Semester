@@ -266,3 +266,104 @@ Steuert den Zugriff auf das Übertragungsmedium und regelt, welches Gerät wann 
 
 ## Transportschicht
 
+- Zuverlässige Ende-zu-Ende-Kommunikation
+
+### TCP (Transmission Control Protocol)
+
+- verbindungorientiert
+- gewährleistet zuverlässige Datenübertragung
+  - Prüfsummen
+  - Pakete in der richtigen Reihenfolge zusammensetzt
+  - verlorene Datenpakete erneut Anfordert
+
+### UDP (User Datagram Protocol)
+
+- verbindungslos
+- keine Fehlerkontrollen
+  - dadurch schneller
+- Anweendung, wenn Integrität weniger wichtig als geringe Verzögerung
+
+### ICMP (Internet Control Message Protocol)
+
+- Fehlermeldung/-diagnose
+- Hosterreichbarkeit (PING)
+
+![alt text](ZusammenfassungOSILayer.png)
+
+# TCP/IP-Modell
+
+![alt text](TCPIP-Modell.png)
+
+# Bitübertragungsschicht
+
+## Kenngrößen
+
+### Bandbreite (B)
+
+- Differenz der unteren und oberen Grenzfrequenz
+- Hz (Hertz)
+  
+
+![alt text](Bandbreite.png)
+
+### Datenübertragungrate (R)
+
+- Wie viele digitale Informationen pro Zeit
+- $R=\frac{\text{Datenmenge D}}{t}$
+
+### Baudrate
+
+- Anzahl der Symbole pro Zeit
+- Ein Symbol kann aus mehreren Bit bestehen
+- Nyquist-Shannon-Abtasttheorem ($R \geq 2B$)
+
+# Codierungen
+
+## Non Return To Zero (NRZ)-Codes
+
+### NRZ-L (Level)
+
+- 1 durch einen Hohen Pegel, 0 durch einen niederen
+- nicht selbsttaktend
+
+### NRZ-I (Inverted)
+
+- 1 durch einen niederen Pegel, 0 durch einen Hohen
+- nicht selbsttaktend
+
+### NRZ-M (Mark)
+
+- Pegelwechsel bei einer 1
+- nicht selbsttaktend
+
+### NRZ-S (Space)
+
+- Pegelwechsel bei einer 0
+- nicht selbsttaktend
+
+![alt text](NRZLeitungscodes.png)
+
+## Return to Zero (RZ-)Codes
+
+- Nutzen drei Zustände: -1; 0; 1
+- erleichtert Synchronisation auf kosten Höherer Bandbreite
+- Logische Null: -1
+
+![alt text](RZLeitungscodes.png)
+
+## Multilevel Transmission Encoding - 3 levels (MLT-3)
+
+- 3 Spannungsniveaus (-1, 0, +1)
+- Änderung immer bei 1 (Reihenfolge: 0, 1, 0, -1, 0)
+- Halbe Beindbreite gegen NRZ
+- nicht selbsttaktend
+
+![alt text](MLT-3.png)
+
+## Manchester-Code
+
+- Selbsttaktend
+- Eine 0 wird durch den Wechsel von High to Low dargestellt
+- Eine 1 durch den Wechsel von Low to High
+
+![alt text](ManchesterLeitungscode.png)

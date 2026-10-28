@@ -1,0 +1,4 @@
+- Verbindungsabbau
+- Verbindungsfreigabe
+- SYN und ACK
+- 
