@@ -107,7 +107,7 @@ Eingesetzte Medien oder Protokolle
 - Verteilt Anwendung und Ressourcen
 - Servicemodelle
   - SaaS: Fertige Softwarelösung
-  - IaaS: RAM/VRAM 
+  - IaaS: RAM/VRAM
   - PaaS: Entwicklungsplattformen für eigene Anwendungen
   - Public Cloud
   - Private Cloud
@@ -172,7 +172,7 @@ Skalierbarkeit beschreibt die Fähigkeit selbst bei zunehmender Größe stabil u
 
 ## Verfügbarkeit
 
-Beschreibt die Betriebsbereitschaft eines Netzwerks. 
+Beschreibt die Betriebsbereitschaft eines Netzwerks.
 
 ### Redundanz
 
@@ -233,9 +233,9 @@ Jede Schicht fügt einen Header mit für die Schicht relevanten Metadaten hinzu.
 
 ## Sicherungsschicht
 
-- sorgt für die fehlerfreie Datenübertragung innerhalb von lokalen Netzwerken. 
+- sorgt für die fehlerfreie Datenübertragung innerhalb von lokalen Netzwerken.
 - physikalische (MAC-)Adressen für die Identifikation
-  
+
 ### Media Access Control (MAC)
 
 Steuert den Zugriff auf das Übertragungsmedium und regelt, welches Gerät wann senden darf.
@@ -302,7 +302,7 @@ Steuert den Zugriff auf das Übertragungsmedium und regelt, welches Gerät wann 
 
 - Differenz der unteren und oberen Grenzfrequenz
 - Hz (Hertz)
-  
+
 
 ![alt text](Bandbreite.png)
 
@@ -435,7 +435,7 @@ Mehr Daten durch eine Datenleitung senden.
   - -N, eine Null übertragen
   - N, eine Eins übertragen
   - 0, nichts übertragen
-  
+
 ![alt text](Multiplexing.png)
 
 
@@ -534,7 +534,7 @@ Mehr Daten durch eine Datenleitung senden.
 - min 500mHz Banbreite
 - sehr geringe Leistung nötig, dadurch sehr hohe Datenrate möglich
 
-# Hubs 
+# Hubs
 
 - keine Kollisionsvermeidung
 - einfaches ungefiltertes weiterleiten
@@ -559,7 +559,7 @@ Mehr Daten durch eine Datenleitung senden.
 
 ### Unbestätigter verbindungsloser Dienst
 
-- unabhängige Rahmen 
+- unabhängige Rahmen
 - keine Bestätigung für erhalt
 - Genutzt, wenn Übertragung sicher oder vollständigkeit nicht wichtig, wie in Sprachchats
 
@@ -723,7 +723,7 @@ Ein zusätzliches Biteigt, ob gerade oder ungerade Anzahl Bits
 - Wenn sie Übertragen möchte sendet sie während ihrer Scheibe eine 1
 - Am ende dieser Konkurenzperiode weiß jeder, wer senden mag
 - Dann senden alle Stationen in der Reihenfolge der Zeitscheiben
- 
+
 ### Tokenweitergabe
 
 - kollisionsfrei
@@ -756,4 +756,7 @@ Ein zusätzliches Biteigt, ob gerade oder ungerade Anzahl Bits
 ![alt text](EthernetFrame.png)
 
 ### Kommunikation
+
+- keine Taktleitung
+- die Preamble dient mit ihrem 1010...101010 Muster zusammen mit dem SFD mit dem Muster 10101011 zum Erkennen des Takts
 
