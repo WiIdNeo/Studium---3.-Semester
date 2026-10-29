@@ -547,5 +547,213 @@ Mehr Daten durch eine Datenleitung senden.
 - Fehlererkennung und -korrektur
   - Prüfsummen
   - zyklische Redundanzprüfung (CRC)
-- 
+- regulierung des Verkehrs, um Überlastung zu vermeiden
+- Kapselung in Frames
+  - Header: Steuerinformationen
+  - Nutzdatenfeld
+  - Trailer: Prüfsummen
+
+![alt text](LayerZweiKommunikation.png)
+
+## Übertragungsarten
+
+### Unbestätigter verbindungsloser Dienst
+
+- unabhängige Rahmen 
+- keine Bestätigung für erhalt
+- Genutzt, wenn Übertragung sicher oder vollständigkeit nicht wichtig, wie in Sprachchats
+
+### Bestätigter verbindungsloser Dienst
+
+- keine dauerhafte logische Verbindung
+- bestätigung des Empfangs jedes einzelnen Rahmens
+- Wenn nicht in bestimter Zeit erhalten, wird erneut gesendet
+- Bei unzuverlässigen Übertragungsmedien eingesetzt
+
+### Bestätigter verbindungsorientierter Dienst
+
+- logische Verbindung
+- nummerierung der Frames
+- Jedes Eintreffen wird rückgemeldet
+- Jeder Frame wird genau einmal übertragen
+- Die Reihenfolge wird beibehalten
+- Wenn Daaten unbedingt Fehlerfrei sein müssen
+
+## Rahmenbildung
+
+### Bytezahl
+
+- Header enthält anzahl der Bytes, so dass der Empfänger weiß, wo ein Rahmen endet.
+- Sehr Fehleranfällig, darum kaum noch isolierte Verwendung
+
+### Flagbytes
+
+- Jeder Rahmen beginnt und endet mit besonderen Flagbytes
+- Wenn das Flagbyte in den Nutzdaten ist, wird ein Escapebyte (Bytestopfen) davorgesetzt, wenn ein Escape-Byte enthalten ist, wird dieses erneut escapet.
+
+### Codierungsverletzungen
+
+- Nutzung von Codierungsfehlern
+  - 4B/5B: 5 Bit nutzen, um 4 Bit darzustelleN: 16 "Fehlerhafte" Kombnationen, die als Begrenzung genutzt werden können.
+
+## Fehlerüberwachung
+
+### Paritätsprüfung
+
+Ein zusätzliches Biteigt, ob gerade oder ungerade Anzahl Bits
+
+### Prüfsumme
+
+### Zyklische Redundanzprüfung (CRC)
+
+## Fehlerkorrektur
+
+- Bestätigung des korrekten Empfangens: Acknowledgment (ACK)
+- Melden der Fehlerhaften Übertragung: Negative Acknowledgment (NAK)
+- Zum Abfangen einer Verlorengegangenen Bestätigung wird ein Timer genutzt
+  - Sollte dieser Auslaufen, ohne dass ein ACK oder NAK gesendet wurde, wird der Rahmen als verloren angenommen und erneut gesendet
+  - Um so entstehende Dopplungen zu umgehen werden Sequenznummern
+    - So erkennt der Empfänger, wenn ein Rahmen Doppelt eintrifft und kann ihn verwerfen
+
+### Wiederholungsstrategien
+
+- **Go-Back-N-ARQ**: Mehrere Rahmen auf einmal, wenn eines verloren oder kaputt: alle folgenden erneut
+- **Selective Repeat ARQ**: Nur fehlerhafte Rahmen werden erneut gesendet
+
+- Flusskontrolle: Der Empfänger schickt regelmäßig infos über den Puffer, damit der Sender ihn nicht überfordert
+
+### Paritätsprüfung
+
+- Gerade Anzahl Bits: 0
+- Ungerade Anzahl Bits: 1
+
+### Paritätsschema
+
+- 2D-Schema
+- Daten werden auf zwei Achsen geteilt, um das gekippte Bit zu identifizieren
+
+![alt text](Paritätsschema.png)
+
+### Prüfsumme
+
+- Alle Datenblöcke werden addiert und ergeben eine Summe, welche an die Nachricht angehangen wird.
+- Der Empfänger tut dies gleich und addiert die Prüfsumme dazu und kommt so auf eine einer-kette, wenn korrekt.
+
+![alt text](Prüfsumme.png)
+
+### Cyclic Redundancy Check (CRC)
+
+- Generatorpolynom k
+- Bitfolgen als Binärpolynom
+
+#### Ablauf
+
+- An Datenpaket k Nullbits anhängen
+- Gesamtpaket per XOR mit Generatorpolynom dividieren
+- Ergebnis wird an den Empfänger geschickt
+- Dieser wendet wieder XOR mit dem Generatorpolynom an
+  - Wenn 0 herauskommt wurde korrekt übertragen
+
+#### Fehler
+
+- Wenn das Generatorpolynom fehlerhaft Übertragen wurde, kann ein false-positiv bei der Fehlerprüfung auftreten
+- In seltenen Fällen kann die Division auch bei Fehlern noch 0 ergeben.
+
+## MAC-Adressen
+
+- MAC: Media Access Controll
+- Addressierung auf OSI-Layer 2
+
+## Mehrfachzugriffsprotokolle
+
+### ALOHA
+
+- Alle Sender schicken Zeitgleich an einen Empfänger
+- Bei gleichzeitigem Senden gehen alle Pakete kaputt
+- Sofern das passiert antwortet der EMpfänger und die Sender senden nach einer zufälligen Zeit erneut
+
+### Slotted ALOHA
+
+- Es werden Zeitscheiben eingeführt
+- Sender müssen nun auf den Beginn einer Zeitscheibe warten und bei Kollision wird eine Zufällige Anzahl Zeitscheiben gewartet
+
+### CSMA-Protokolle
+
+- Geräte fragen den Kanal vor dem Senden ab, ob gerade jemand sendet
+
+#### Persistentes CSMA
+
+- kontinuierlicihe Überwachung des Mediums vor dem senden
+- bei kollision zufällige Zeitspanne warten
+
+#### nicht-persistentes CSMA
+
+- prüft einmal pro Zeitinterval
+
+#### p-persistentes CSMA
+
+- Test des Kanals
+  - Frei: Sendet mit Wahrscheinlichkeit p
+  - Besetzt: wartet mit Wahrscheinlichkeit q = 1 - p auf die nächste Zeitscheibe
+
+#### CSMA/CD
+
+##### Ablauf
+
+1. Carrier Sense - Abhören des Mediums
+  - Kontinuierliches Prüfen (Busy Waiting)
+  - Wenn frei wird wartet das System (Interframe Gap)
+  - Während des Sendens hört er weiter ab, um Kollision frühzeitig zu erkennen (Listen while Talk)
+2. Sendevorgang
+  - Übertragung beginnt mit einer Präambel
+3. Kollisionserkennung
+  - Bei Erkennen einer Kollision wird ein FAM-Signal gesendet (32 Bit)
+  - Wird dieses Empfangen unterbrechen alle Stationen ihr Senden.
+4. Übertragungswiederholung
+  - nach einer Zufälligen Zeit fangen sie wieder das Abhören an.
+  - nach 16 Erfolglosen Übertragungsversuchen, bricht der Vorgang ab (Attempt Limit)
+
+## Kollisionsfreie Protokolle
+
+### Bitmusterprotokoll (Reservierungsprotokoll)
+
+- Kollisionslos
+- N Zeitscheiben (N = Anzahl der Geräte)
+- jedes System genau eine Zeitscheibe
+- Wenn sie Übertragen möchte sendet sie während ihrer Scheibe eine 1
+- Am ende dieser Konkurenzperiode weiß jeder, wer senden mag
+- Dann senden alle Stationen in der Reihenfolge der Zeitscheiben
+ 
+### Tokenweitergabe
+
+- kollisionsfrei
+- bestimmtes Steuerpaket „Token”
+- Nur die Station mit diesem Token darf senden.
+- Nach erfolgter Sendung wird es weitergegeben
+
+### Binärer Countdown
+
+- kollisionsfrei
+- geringerer Overhead
+- MAC-Adressen werden an jeden Geschickt
+  - Wenn eine Stelle der anderen eine 1 hat, wo die eigene eine Null hat, tritt diese vor jener zurück
+- Der Zuletzt verbleibende darf Senden
+
+## Ethernet
+
+### Rahmen
+
+|Name|Byte|Funktion|
+|-|-|-|
+|Preamble|7|ynchronisation und Makieren des Frame-Beginns
+|Start Frame Delimiter (SFD)|1|Makiert ende der Preamble uns beginn des eigentlichen Frames
+|Destination MAC|6|MAC-Adresse des Ziels|
+|Source MAC|6|MAC-Addresse der Quelle
+|Ethertype (DIX-Gruppe) oder Length (IEEE)|2|Typ des Datenpakets oder Länge des Datenfeldes
+|Payload|64-1518|Enthält bis zu 1500 Byte Nutzdaten
+|Frame Check Sequence (FCS) | 4 | Beinhaltet CRC
+
+![alt text](EthernetFrame.png)
+
+### Kommunikation
 
