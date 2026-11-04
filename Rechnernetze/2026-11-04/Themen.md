@@ -1,0 +1,12 @@
+- VLANs
+- NAT
+  - PAT
+  - Statisch
+  - Dynamisch (nicht relevant)
+- Private Adressbereiche (alle 3!)
+- NRZ
+- DNS
+  - Abfrage (grob)
+  - Namensraum und Hirachie
+  - DNS-Antworten (grob)
+
