@@ -72,7 +72,7 @@ Zwei Teile musst du erkennen:
 ┌──────────┐      ┌──────────┐      ┌──────────┐
 │ Anwend.  │      │ Anwend.  │      │ Anwend.  │
 ├──────────┴──────┴──────────┴──────┴──────────┤
-│                 MIDDLEWARE                    │   ← verbirgt die Verteilung
+│                 MIDDLEWARE                   │   ← verbirgt die Verteilung
 ├──────────┬──────┬──────────┬──────┬──────────┤
 │ Betriebs-│      │ Betriebs-│      │ Betriebs-│
 │ system A │      │ system B │      │ system C │
